@@ -1,0 +1,2 @@
+class KiwiPOM:
+    pass
