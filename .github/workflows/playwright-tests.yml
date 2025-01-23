@@ -14,17 +14,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install dependencies
+      - name: Install dependencies and test start
         run: |
           python3 -m venv venv
           . venv/bin/activate
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
-
-      - name: Install Playwright Browsers
-        run: python -m playwright install
-
-      - name: Run Playwright Tests
-        env:
-          PWDEBUG: 1
-        run: python -m pytest -m basic_search
+          python -m pip install -r requirements.txt
+          python -m playwright install
+          python -m pytest -m basic_search
