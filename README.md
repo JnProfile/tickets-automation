@@ -49,7 +49,7 @@ python -m playwright install
 
 ## 🚀 Running Tests
 
-### 1. In only headful mode
+### In only headful mode
 
 To run all tests:
 

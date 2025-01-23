@@ -16,8 +16,12 @@ class KiwiLocators:
         'div[data-test="SearchFieldItem-origin"] input[data-test="SearchField-input"]'
     )
     DESTINATION_INPUT = 'div[data-test="SearchFieldItem-destination"] input[data-test="SearchField-input"]'
-    ORIGIN_DROPDOWN = 'div[data-test="PlacepickerModalOpened-origin"] div[class="w-full"]'
-    DESTINATION_DROPDOWN = 'div[data-test="PlacepickerModalOpened-destination"] div[class="w-full"]'
+    ORIGIN_DROPDOWN = (
+        'div[data-test="PlacepickerModalOpened-origin"] div[class="w-full"]'
+    )
+    DESTINATION_DROPDOWN = (
+        'div[data-test="PlacepickerModalOpened-destination"] div[class="w-full"]'
+    )
     PLACE_PICKER = 'div[data-test="PlacePickerInputPlace"]'
     PLACE_PICKER_CLOSE_BUTTON = 'div[data-test="PlacePickerInputPlace-close"]'
     DEPARTURE_DATE_INPUT = (
@@ -103,7 +107,6 @@ class KiwiMainPOM:
             except ValueError as e:
                 if i == retries - 1:
                     raise e
-
 
     def choose_trip_type(self, trip_type: TripType):
         self._wait_and_click(KiwiLocators.TRIP_TYPE_DROPDOWN)
