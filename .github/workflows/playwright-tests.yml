@@ -1,0 +1,30 @@
+name: Playwright Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  run-tests:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: |
+          python3 -m venv venv
+          source venv/bin/activate
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Install Playwright Browsers
+        run: python -m playwright install
+
+      - name: Run Playwright Tests
+        env:
+          PWDEBUG: 1
+        run: python -m pytest -m basic_search
