@@ -88,15 +88,22 @@ class KiwiMainPOM:
 
         self._wait_for_all_items_availability(KiwiLocators.DROPDOWN_ITEM)
 
-        items = self.page.query_selector_all(KiwiLocators.DROPDOWN_ITEM)
+        retries = 3
+        for i in range(retries):
+            try:
+                items = self.page.query_selector_all(KiwiLocators.DROPDOWN_ITEM)
 
-        for item in items:
-            text = item.query_selector("div.flex-1").inner_text()
-            if location in text:
-                item.click()
-                return
+                for item in items:
+                    text = item.query_selector("div.flex-1").inner_text()
+                    if location in text:
+                        item.click()
+                        return
 
-        raise ValueError(f"Location '{location}' not found in dropdown {items}")
+                raise ValueError(f"Location '{location}' not found in dropdown {items}")
+            except ValueError as e:
+                if i == retries - 1:
+                    raise e
+
 
     def choose_trip_type(self, trip_type: TripType):
         self._wait_and_click(KiwiLocators.TRIP_TYPE_DROPDOWN)
