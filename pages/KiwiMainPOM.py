@@ -93,6 +93,7 @@ class KiwiMainPOM:
         self._wait_for_all_items_availability(KiwiLocators.DROPDOWN_ITEM)
 
         retries = 3
+        # Added retries to handle the case when the dropdown is not fully loaded
         for i in range(retries):
             try:
                 items = self.page.query_selector_all(KiwiLocators.DROPDOWN_ITEM)
